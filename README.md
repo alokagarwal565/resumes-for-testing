@@ -4,7 +4,7 @@ A modern web application that generates customizable numbers of random sample re
 
 ## 🌐 Live Application
 
-**Production URL**: https://resumes-for-testing-biyfu0y7s-aloks-projects-4f7d6a75.vercel.app
+**Production URL**: https://resumes-for-testing.vercel.app/
 
 ## ✨ Features
 
