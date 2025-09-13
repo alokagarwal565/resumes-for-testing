@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-file-pdf"></i> Resume Generator</h1>
+            <p>Generate professional sample resumes in PDF format</p>
+            <div class="vercel-badge">
+                <small><i class="fas fa-cloud"></i> Deployed on Vercel</small>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="form-container">
+                <form id="resumeForm" class="resume-form">
+                    <div class="form-group">
+                        <label for="numResumes" class="form-label">
+                            <i class="fas fa-hashtag"></i>
+                            Number of Resumes
+                        </label>
+                        <input 
+                            type="number" 
+                            id="numResumes" 
+                            name="numResumes" 
+                            min="1" 
+                            max="50" 
+                            value="10" 
+                            required
+                            class="form-input"
+                        >
+                        <small class="form-help">Enter a number between 1 and 50 (Vercel limit)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-robot"></i>
+                            Content Generation
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="contentType" value="template" checked>
+                                <span class="radio-custom"></span>
+                                Template-based (Fast)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="contentType" value="gemini">
+                                <span class="radio-custom"></span>
+                                Gemini AI (Enhanced)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="geminiKeyGroup" style="display: none;">
+                        <label for="geminiKey" class="form-label">
+                            <i class="fas fa-key"></i>
+                            Gemini API Key
+                        </label>
+                        <input 
+                            type="password" 
+                            id="geminiKey" 
+                            name="geminiKey" 
+                            class="form-input"
+                            placeholder="Enter your Gemini API key"
+                        >
+                        <small class="form-help">
+                            <a href="https://makersuite.google.com/app/apikey" target="_blank">Get your API key here</a>
+                        </small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="generateBtn">
+                        <i class="fas fa-magic"></i>
+                        Generate Resumes
+                    </button>
+                </form>
+            </div>
+
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="progress-header">
+                    <h3><i class="fas fa-cogs"></i> Generating Resumes</h3>
+                    <span id="progressText">0 / 0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-details">
+                    <p id="progressDetails">Preparing to generate resumes...</p>
+                </div>
+            </div>
+
+            <div class="result-container" id="resultContainer" style="display: none;">
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Resumes Generated Successfully!</h3>
+                    <p id="resultText">Your resumes are ready for download.</p>
+                </div>
+                <div class="download-section">
+                    <a href="#" id="downloadLink" class="btn btn-download">
+                        <i class="fas fa-download"></i>
+                        Download ZIP File
+                    </a>
+                    <div class="file-info">
+                        <p><i class="fas fa-file-archive"></i> <span id="fileSize">-</span></p>
+                        <p><i class="fas fa-clock"></i> Generated in <span id="generationTime">-</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-container" id="errorContainer" style="display: none;">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p id="errorText">Something went wrong. Please try again.</p>
+                </div>
+                <button class="btn btn-secondary" onclick="resetForm()">
+                    <i class="fas fa-redo"></i>
+                    Try Again
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Resume Generator. Built with Python, Flask, and deployed on Vercel.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script_vercel.js') }}"></script>
+</body>
+</html>
